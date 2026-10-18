@@ -1,6 +1,6 @@
 <hr>
     <footer>
-        <p><i>TP3 réalisé par CHADLI ABD ESSAMAD - 18/10/2026</i></p>
+        <p><i>TP3 réalisé par ABD ESSAMAD CHADLI - <?= date('d/m/Y') ?></i></p>
     </footer>
 </body>
 </html>
