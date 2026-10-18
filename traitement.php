@@ -17,10 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // verif des bornes
         if ($n_info >= NOTE_MIN && $n_info <= NOTE_MAX && $n_math >= NOTE_MIN && $n_math <= NOTE_MAX) {
             echo "<h3 style='color:green'>Succès ! Recap pour $nom :</h3>";
-            echo "<ul>";
-            echo "<li>Note en Informatique : $n_info / 20</li>";
-            echo "<li>Note en Maths : $n_math / 20</li>";
-            echo "</ul>";
+            echo "<ul><li>Info : $n_info / 20</li><li>Maths : $n_math / 20</li></ul>";
+
+            $fichier = fopen('data/notes.csv', 'a');
+            fputcsv($fichier, [$nom, $n_info, $n_math], ';'); 
+            fclose($fichier);
+            echo "<p><i>-> Les donnees ont bien été sauvegardées dans le CSV !</i></p>";
+
+            /*
+              Qst 5.1 : que se passerait-il avec le mode "w" au lieu de "a" ?
+              Rep : "w" ecrase le fichier a chaque fois . c-a-d qu on garderait que le tout dernier apprenant saisi.
+            */
+  
         } else {
             echo "<p style='color:red'>Erreur : Les notes doivent etre entre " . NOTE_MIN . " et " . NOTE_MAX . ".</p>";
         }
@@ -33,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 /*
   Qsts:
   1- Pourquoi POST pr un mot de passe ? 
-     car avec GET le mdp apparait en clair dans l'URL, n'importe qui derriere moi peut le lire, ou on peut le voir ds l historique web. En POST, c'est cache dans le body HTTP .
+     car avec GET le mdp apparait en clair dans l'URL, n'importe qui derriere moi peut le lire, ou on peut le voir ds l historique web. En POST, c est cache dans le body HTTP .
   
   2- Que contient $_REQUEST ? 
      C'est un super tableau global qui regroupe tout : $_GET, $_POST et $_COOKIE . 
