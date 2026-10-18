@@ -3,7 +3,10 @@
 // Objectif : Manipulation des tableaux (Partie 3)
 // Date : 18/10/2026
 
-require 'config.php'; 
+require 'config.php';
+
+include 'includes/entete_inc.php';
+include 'includes/menu_inc.php';
 
 // declaration de la fct mention() a nv
 if (!function_exists('mention')) {
@@ -128,5 +131,15 @@ var_dump($a == $b); echo "<br>";
 
 echo "Predict: \$a === \$b donne false (meme valeurs mais pas dans le meme ordre, donc pas strictement identiques)<br>";
 var_dump($a === $b); echo "<br>";
+
+/*
+  EXPERIENCES (Exo 4.1.3 et 4.1.4) :
+  - Exp 1 : Avec include d'un fichier qui existe pas, on a juste un "Warning" mais le script continue. 
+    Avec require, on a une "Fatal error" et ca bloque tout, la suite s'execute pas.
+  - Exp 2 : Si j'include 2 fois menu_inc.php avec 'include', le menu s'affiche 2 fois (doublon). 
+    Avec 'include_once', php remarque qu'il est deja la et l'ignore, donc il s'affiche qu'une seule fois !
+*/
+
+include 'includes/pied_inc.php';
 
 ?>
